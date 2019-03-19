@@ -26,7 +26,7 @@ final class ComplexZero extends Complex {
 
     @Override
     public Complex subtract(Complex c) {
-        return new Complex(-c.getRealPart(), -c.getImaginaryPart());
+        return Complex.valueOf(-c.re, -c.im);
     }
 
     @Override
@@ -36,6 +36,9 @@ final class ComplexZero extends Complex {
 
     @Override
     public Complex divide(Complex c) {
+        if (c == this) {
+            //add support for the (NaN + NaNi) Class
+        }
         return this;
     }
 
@@ -51,6 +54,6 @@ final class ComplexZero extends Complex {
 
     @Override
     public String toString() {
-        return "(0 + 0i)";
+        return "(0.0 + 0.0i)";
     }
 }

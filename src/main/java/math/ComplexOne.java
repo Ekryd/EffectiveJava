@@ -20,23 +20,25 @@ final class ComplexOne extends Complex {
 
     @Override
     public Complex plus(Complex c) {
-        return new Complex(1 + c.getRealPart(), c.getImaginaryPart());
+        return Complex.valueOf(1 + c.re, c.im);
     }
 
     @Override
     public Complex subtract(Complex c) {
-        return new Complex(1 - c.getRealPart(), -c.getImaginaryPart());
+        return Complex.valueOf(1 - c.re, -c.im);
     }
 
     @Override
     public Complex multiply(Complex c) {
-        return new Complex(c.getRealPart(), c.getImaginaryPart());
+        return Complex.valueOf(c.re, c.im);
     }
 
     @Override
     public Complex divide(Complex c) {
-        double tmp = c.getRealPart() * c.getRealPart() + c.getImaginaryPart() * c.getImaginaryPart();
-        return new Complex((c.getRealPart()) / tmp, (-1 * c.getImaginaryPart()) / tmp);
+        double tmp = c.re * c.re + c.im * c.im;
+        return Complex.valueOf(
+                (c.re) / tmp,
+                (-c.im) / tmp);
     }
 
     @Override
@@ -51,6 +53,6 @@ final class ComplexOne extends Complex {
 
     @Override
     public String toString() {
-        return "(1 + 0i)";
+        return "(1.0 + 0.0i)";
     }
 }
