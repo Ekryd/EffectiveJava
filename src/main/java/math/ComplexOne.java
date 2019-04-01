@@ -1,12 +1,8 @@
 package math;
 
 /* This can be final */
-final class ComplexOne extends Complex {
-    static final Complex INSTANCE = new ComplexOne();
-
-    private ComplexOne() {
-        super(1, 0);
-    }
+enum ComplexOne implements Complex {
+    INSTANCE;
 
     @Override
     public double getRealPart() {
@@ -20,35 +16,25 @@ final class ComplexOne extends Complex {
 
     @Override
     public Complex plus(Complex c) {
-        return Complex.valueOf(1 + c.re, c.im);
+        return Complex.valueOf(1 + c.getRealPart(), c.getImaginaryPart());
     }
 
     @Override
     public Complex subtract(Complex c) {
-        return Complex.valueOf(1 - c.re, -c.im);
+        return Complex.valueOf(1 - c.getRealPart(), -c.getImaginaryPart());
     }
 
     @Override
     public Complex multiply(Complex c) {
-        return Complex.valueOf(c.re, c.im);
+        return Complex.valueOf(c.getRealPart(), c.getImaginaryPart());
     }
 
     @Override
     public Complex divide(Complex c) {
-        double tmp = c.re * c.re + c.im * c.im;
+        double tmp = c.getRealPart() * c.getRealPart() + c.getImaginaryPart() * c.getImaginaryPart();
         return Complex.valueOf(
-                (c.re) / tmp,
-                (-c.im) / tmp);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        return this == o;
-    }
-
-    @Override
-    public int hashCode() {
-        return 1;
+                (c.getRealPart()) / tmp,
+                (-c.getImaginaryPart()) / tmp);
     }
 
     @Override

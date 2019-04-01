@@ -1,25 +1,24 @@
 package math;
 
-/* Don't set the class to final. Use package protected constructor instead */
-public class Complex {
-    public static final Complex ZERO = ComplexZero.INSTANCE;
-    public static final Complex ONE = ComplexOne.INSTANCE;
+/**
+ * @author bjorn
+ * @since 2019-04-01
+ */
+public interface Complex {
+    Complex ZERO = ComplexZero.INSTANCE;
+    Complex ONE = ComplexOne.INSTANCE;
 
-    //Use constant classes instead
-    public static final Complex MINUS_ONE = new Complex(-1, 0);
-    public static final Complex I = new Complex(0, 1);
-    public static final Complex MINUS_I = new Complex(0, -1);
+    Complex MINUS_ONE = new ComplexImpl(-1, 0);
+    Complex I = new ComplexImpl(0, 1);
+    Complex MINUS_I = new ComplexImpl(0, -1);
 
-    final double re;
-    final double im;
-
-    public static Complex valueOf(double re, double im) {
+    static Complex valueOf(double re, double im) {
         /* Add handling of -0.0 */
         if (re == 0.0 && im == 0.0) {
-            return ComplexZero.ZERO;
+            return ZERO;
         }
         if (re == 1.0 && im == 0.0) {
-            return ComplexZero.ONE;
+            return ONE;
         }
         if (re == -1.0 && im == 0.0) {
             return MINUS_ONE;
@@ -31,65 +30,18 @@ public class Complex {
             return MINUS_I;
         }
 
-        return new Complex(re, im);
+        return new ComplexImpl(re, im);
     }
+    
+    double getRealPart();
 
-    Complex(double re, double im) {
-        this.re = re;
-        this.im = im;
-    }
+    double getImaginaryPart();
 
-    // Accessors with no corresponding mutators, prefixed with get!!!
-    public double getRealPart() {
-        return re;
-    }
+    Complex plus(Complex c);
 
-    public double getImaginaryPart() {
-        return im;
-    }
+    Complex subtract(Complex c);
 
-    public Complex plus(Complex c) {
-        return Complex.valueOf(re + c.re, im + c.im);
-    }
+    Complex multiply(Complex c);
 
-    public Complex subtract(Complex c) {
-        return Complex.valueOf(re - c.re, im - c.im);
-    }
-
-    public Complex multiply(Complex c) {
-        return Complex.valueOf(re * c.re - im * c.im, re * c.im + im * c.re);
-    }
-
-    public Complex divide(Complex c) {
-        double tmp = c.re * c.re + c.im * c.im;
-        return Complex.valueOf(
-                (re * c.re + im * c.im) / tmp,
-                (im * c.re - re * c.im) / tmp);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == this) {
-            return true;
-        }
-        if (!(o instanceof Complex)) {
-            return false;
-        }
-        Complex c = (Complex) o;
-
-        // See page 43 to find out why we use compare instead of ==
-        return Double.compare(re, c.re) == 0 && Double.compare(im, c.im) == 0;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = Double.hashCode(re);
-        result = 31 * result + Double.hashCode(im);
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "(" + re + " + " + im + "i)";
-    }
+    Complex divide(Complex c);
 }

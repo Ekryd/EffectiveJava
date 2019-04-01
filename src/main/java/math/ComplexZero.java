@@ -2,12 +2,8 @@ package math;
 
 /* Check out the return values, simple!!! */
 /* This can be final */
-final class ComplexZero extends Complex {
-    static final Complex INSTANCE = new ComplexZero();
-
-    private ComplexZero() {
-        super(0, 0);
-    }
+enum ComplexZero implements Complex {
+    INSTANCE;
 
     @Override
     public double getRealPart() {
@@ -26,7 +22,7 @@ final class ComplexZero extends Complex {
 
     @Override
     public Complex subtract(Complex c) {
-        return Complex.valueOf(-c.re, -c.im);
+        return Complex.valueOf(-c.getRealPart(), -c.getImaginaryPart());
     }
 
     @Override
@@ -38,20 +34,11 @@ final class ComplexZero extends Complex {
     public Complex divide(Complex c) {
         if (c == this) {
             //add support for the (NaN + NaNi) Class
+            Complex.valueOf(Double.NaN, Double.NaN);
         }
         return this;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        return o == this;
-    }
-
-    @Override
-    public int hashCode() {
-        return 0;
-    }
-
+    
     @Override
     public String toString() {
         return "(0.0 + 0.0i)";
