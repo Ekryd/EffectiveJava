@@ -1,11 +1,11 @@
 package math;
 
-enum ComplexOne implements Complex {
+enum ComplexMinusOne implements Complex {
     INSTANCE;
 
     @Override
     public double getRealPart() {
-        return 1;
+        return -1;
     }
 
     @Override
@@ -15,29 +15,29 @@ enum ComplexOne implements Complex {
 
     @Override
     public Complex plus(Complex c) {
-        return Complex.valueOf(1 + c.getRealPart(), c.getImaginaryPart());
+        return Complex.valueOf(-1 + c.getRealPart(), c.getImaginaryPart());
     }
 
     @Override
     public Complex subtract(Complex c) {
-        return Complex.valueOf(1 - c.getRealPart(), -c.getImaginaryPart());
+        return Complex.valueOf(-1 - c.getRealPart(), -c.getImaginaryPart());
     }
 
     @Override
     public Complex multiply(Complex c) {
-        return Complex.valueOf(c.getRealPart(), c.getImaginaryPart());
+        return Complex.valueOf(-1 * c.getRealPart(), -1 * c.getImaginaryPart());
     }
 
     @Override
     public Complex divide(Complex c) {
         double tmp = c.getRealPart() * c.getRealPart() + c.getImaginaryPart() * c.getImaginaryPart();
         return Complex.valueOf(
-                (c.getRealPart()) / tmp,
-                (-c.getImaginaryPart()) / tmp);
+                (-c.getRealPart()) / tmp,
+                (c.getImaginaryPart()) / tmp);
     }
 
     @Override
     public String toString() {
-        return "(1.0 + 0.0i)";
+        return "(" + -1.0 + " + " + 0.0 + "i)";
     }
 }

@@ -1,7 +1,6 @@
 package math;
 
 /* Check out the return values, simple!!! */
-/* This can be final */
 enum ComplexZero implements Complex {
     INSTANCE;
 
