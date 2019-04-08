@@ -1,8 +1,11 @@
 package math;
 
 /* Check out the return values, simple!!! */
-enum ComplexZero implements Complex {
-    INSTANCE;
+final class ComplexZero extends Complex {
+    static final Complex INSTANCE = new ComplexZero();
+
+    private ComplexZero() {
+    }
 
     @Override
     public double getRealPart() {
@@ -37,7 +40,12 @@ enum ComplexZero implements Complex {
         }
         return this;
     }
-    
+
+    @Override
+    public int hashCode() {
+        return 0;
+    }
+
     @Override
     public String toString() {
         return "(0.0 + 0.0i)";

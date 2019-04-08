@@ -1,25 +1,25 @@
 package math;
 
 /* Don't set the class to final. Use package protected constructor instead */
-class ComplexImpl implements Complex {
+class ComplexImpl extends Complex {
 
     private final double re;
     private final double im;
 
     ComplexImpl(double re, double im) {
+        super();
         this.re = re;
         this.im = im;
     }
 
-    @Override
     public double getRealPart() {
         return re;
     }
 
-    @Override
     public double getImaginaryPart() {
         return im;
     }
+
 
     @Override
     public Complex plus(Complex c) {
@@ -49,13 +49,13 @@ class ComplexImpl implements Complex {
         if (o == this) {
             return true;
         }
-        if (!(o instanceof ComplexImpl)) {
+        if (!(o instanceof Complex)) {
             return false;
         }
-        ComplexImpl c = (ComplexImpl) o;
+        Complex c = (Complex) o;
 
         // See page 43 to find out why we use compare instead of ==
-        return Double.compare(re, c.re) == 0 && Double.compare(im, c.im) == 0;
+        return Double.compare(re, c.getRealPart()) == 0 && Double.compare(im, c.getImaginaryPart()) == 0;
     }
 
     @Override

@@ -1,7 +1,10 @@
 package math;
 
-enum ComplexOne implements Complex {
-    INSTANCE;
+final class ComplexOne extends Complex {
+    static final Complex INSTANCE = new ComplexOne();
+
+    private ComplexOne() {
+    }
 
     @Override
     public double getRealPart() {
@@ -34,6 +37,11 @@ enum ComplexOne implements Complex {
         return Complex.valueOf(
                 (c.getRealPart()) / tmp,
                 (-c.getImaginaryPart()) / tmp);
+    }
+
+    @Override
+    public int hashCode() {
+        return 1;
     }
 
     @Override

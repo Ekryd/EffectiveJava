@@ -4,15 +4,14 @@ package math;
  * @author bjorn
  * @since 2019-04-01
  */
-public interface Complex {
-    Complex ZERO = ComplexZero.INSTANCE;
-    Complex ONE = ComplexOne.INSTANCE;
-    Complex MINUS_ONE = ComplexMinusOne.INSTANCE;
-    Complex I = ComplexI.INSTANCE;
-    Complex MINUS_I = ComplexMinusI.INSTANCE;
+public abstract class Complex {
+    public static Complex ZERO = ComplexZero.INSTANCE;
+    public static Complex ONE = ComplexOne.INSTANCE;
+    public static Complex MINUS_ONE = ComplexMinusOne.INSTANCE;
+    public static Complex I = ComplexI.INSTANCE;
+    public static Complex MINUS_I = ComplexMinusI.INSTANCE;
 
-    /** Does this method belong to the interface? Moving it elsewhere makes the code more complex though */
-    static Complex valueOf(double re, double im) {
+    public static Complex valueOf(double re, double im) {
         if (re == 0.0) {
             if (im == 0.0) {
                 return ZERO;
@@ -37,15 +36,20 @@ public interface Complex {
         return new ComplexImpl(re, im);
     }
 
-    double getRealPart();
+    public abstract double getRealPart();
 
-    double getImaginaryPart();
+    public abstract double getImaginaryPart();
 
-    Complex plus(Complex c);
+    public abstract Complex plus(Complex c);
 
-    Complex subtract(Complex c);
+    public abstract Complex subtract(Complex c);
 
-    Complex multiply(Complex c);
+    public abstract Complex multiply(Complex c);
 
-    Complex divide(Complex c);
+    public abstract Complex divide(Complex c);
+
+    @Override
+    public boolean equals(Object o) {
+        return o == this;
+    }
 }

@@ -1,8 +1,11 @@
 package math;
 
 /* Don't set the class to final. Use package protected constructor instead */
-enum ComplexI implements Complex {
-    INSTANCE;
+final class ComplexI extends Complex {
+    static final Complex INSTANCE = new ComplexI();
+
+    private ComplexI() {
+    }
 
     @Override
     public double getRealPart() {
@@ -21,12 +24,12 @@ enum ComplexI implements Complex {
 
     @Override
     public Complex subtract(Complex c) {
-        return Complex.valueOf(- c.getRealPart(), 1 - c.getImaginaryPart());
+        return Complex.valueOf(-c.getRealPart(), 1 - c.getImaginaryPart());
     }
 
     @Override
     public Complex multiply(Complex c) {
-        return Complex.valueOf( - 1 * c.getImaginaryPart(), c.getRealPart());
+        return Complex.valueOf(-1 * c.getImaginaryPart(), c.getRealPart());
     }
 
     @Override
@@ -35,6 +38,11 @@ enum ComplexI implements Complex {
         return Complex.valueOf(
                 (c.getImaginaryPart()) / tmp,
                 (c.getRealPart()) / tmp);
+    }
+
+    @Override
+    public int hashCode() {
+        return 31;
     }
 
     @Override
