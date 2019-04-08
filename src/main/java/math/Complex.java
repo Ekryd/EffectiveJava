@@ -11,7 +11,8 @@ public abstract class Complex {
     public static Complex I = ComplexI.INSTANCE;
     public static Complex MINUS_I = ComplexMinusI.INSTANCE;
 
-    public static Complex valueOf(double re, double im) {
+    /* Should be final to avoid overriding by subclasses */
+    public final static Complex valueOf(double re, double im) {
         if (re == 0.0) {
             if (im == 0.0) {
                 return ZERO;
@@ -35,6 +36,9 @@ public abstract class Complex {
 
         return new ComplexImpl(re, im);
     }
+    
+    /* Package protected constructor to limit extension */
+    Complex() {}
 
     public abstract double getRealPart();
 
